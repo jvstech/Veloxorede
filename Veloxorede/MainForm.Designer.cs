@@ -36,17 +36,6 @@
       this.groupingTab = new System.Windows.Forms.TabPage();
       this.scrollingTab = new System.Windows.Forms.TabPage();
       this.scrollingText = new System.Windows.Forms.RichTextBox();
-      this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-      this.fileMenu = new System.Windows.Forms.ToolStripDropDownButton();
-      this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-      this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.speedMenu = new System.Windows.Forms.ToolStripDropDownButton();
-      this.increaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.decreaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-      this.increaseGroupSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.decreaseGroupSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStrip2 = new System.Windows.Forms.ToolStrip();
       this.intervalLabel = new System.Windows.Forms.ToolStripLabel();
       this.intervalValue = new Veloxorede.ToolStripNumericUpDown();
@@ -56,6 +45,22 @@
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.startStopButton = new System.Windows.Forms.ToolStripButton();
       this.pauseButton = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+      this.toggleTextToSpeechButton = new System.Windows.Forms.ToolStripButton();
+      this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+      this.fileMenu = new System.Windows.Forms.ToolStripDropDownButton();
+      this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.importFromClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.speedMenu = new System.Windows.Forms.ToolStripDropDownButton();
+      this.increaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.decreaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+      this.increaseGroupSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.decreaseGroupSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+      this.pauseContinueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.statusStrip1 = new System.Windows.Forms.StatusStrip();
       this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
       this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -65,8 +70,8 @@
       this.tabs.SuspendLayout();
       this.inputTab.SuspendLayout();
       this.scrollingTab.SuspendLayout();
-      this.toolStrip1.SuspendLayout();
       this.toolStrip2.SuspendLayout();
+      this.toolStrip1.SuspendLayout();
       this.statusStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -76,7 +81,7 @@
       // contentContainer.ContentPanel
       // 
       this.contentContainer.ContentPanel.Controls.Add(this.tabs);
-      this.contentContainer.ContentPanel.Size = new System.Drawing.Size(800, 402);
+      this.contentContainer.ContentPanel.Size = new System.Drawing.Size(800, 372);
       this.contentContainer.Dock = System.Windows.Forms.DockStyle.Fill;
       this.contentContainer.Location = new System.Drawing.Point(0, 0);
       this.contentContainer.Name = "contentContainer";
@@ -86,8 +91,8 @@
       // 
       // contentContainer.TopToolStripPanel
       // 
-      this.contentContainer.TopToolStripPanel.Controls.Add(this.toolStrip1);
       this.contentContainer.TopToolStripPanel.Controls.Add(this.toolStrip2);
+      this.contentContainer.TopToolStripPanel.Controls.Add(this.toolStrip1);
       // 
       // tabs
       // 
@@ -98,7 +103,7 @@
       this.tabs.Location = new System.Drawing.Point(0, 0);
       this.tabs.Name = "tabs";
       this.tabs.SelectedIndex = 0;
-      this.tabs.Size = new System.Drawing.Size(800, 402);
+      this.tabs.Size = new System.Drawing.Size(800, 372);
       this.tabs.TabIndex = 1;
       // 
       // inputTab
@@ -107,7 +112,7 @@
       this.inputTab.Location = new System.Drawing.Point(4, 22);
       this.inputTab.Name = "inputTab";
       this.inputTab.Padding = new System.Windows.Forms.Padding(3);
-      this.inputTab.Size = new System.Drawing.Size(792, 376);
+      this.inputTab.Size = new System.Drawing.Size(792, 346);
       this.inputTab.TabIndex = 0;
       this.inputTab.Text = "Input";
       this.inputTab.UseVisualStyleBackColor = true;
@@ -119,7 +124,7 @@
       this.inputText.Location = new System.Drawing.Point(3, 3);
       this.inputText.Name = "inputText";
       this.inputText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-      this.inputText.Size = new System.Drawing.Size(786, 370);
+      this.inputText.Size = new System.Drawing.Size(786, 340);
       this.inputText.TabIndex = 0;
       this.inputText.Text = "";
       this.inputText.TextChanged += new System.EventHandler(this.inputText_TextChanged);
@@ -129,7 +134,7 @@
       this.groupingTab.Location = new System.Drawing.Point(4, 22);
       this.groupingTab.Name = "groupingTab";
       this.groupingTab.Padding = new System.Windows.Forms.Padding(3);
-      this.groupingTab.Size = new System.Drawing.Size(792, 376);
+      this.groupingTab.Size = new System.Drawing.Size(792, 346);
       this.groupingTab.TabIndex = 1;
       this.groupingTab.Text = "Grouping";
       this.groupingTab.UseVisualStyleBackColor = true;
@@ -140,7 +145,7 @@
       this.scrollingTab.Location = new System.Drawing.Point(4, 22);
       this.scrollingTab.Name = "scrollingTab";
       this.scrollingTab.Padding = new System.Windows.Forms.Padding(3);
-      this.scrollingTab.Size = new System.Drawing.Size(792, 376);
+      this.scrollingTab.Size = new System.Drawing.Size(792, 346);
       this.scrollingTab.TabIndex = 2;
       this.scrollingTab.Text = "Scrolling";
       this.scrollingTab.UseVisualStyleBackColor = true;
@@ -153,111 +158,14 @@
       this.scrollingText.Name = "scrollingText";
       this.scrollingText.ReadOnly = true;
       this.scrollingText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-      this.scrollingText.Size = new System.Drawing.Size(786, 370);
+      this.scrollingText.Size = new System.Drawing.Size(786, 340);
       this.scrollingText.TabIndex = 1;
       this.scrollingText.Text = "";
-      // 
-      // toolStrip1
-      // 
-      this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-      this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileMenu,
-            this.speedMenu});
-      this.toolStrip1.Location = new System.Drawing.Point(3, 0);
-      this.toolStrip1.Name = "toolStrip1";
-      this.toolStrip1.Size = new System.Drawing.Size(84, 25);
-      this.toolStrip1.TabIndex = 0;
-      // 
-      // fileMenu
-      // 
-      this.fileMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-      this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.exitToolStripMenuItem});
-      this.fileMenu.Image = ((System.Drawing.Image)(resources.GetObject("fileMenu.Image")));
-      this.fileMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.fileMenu.Name = "fileMenu";
-      this.fileMenu.ShowDropDownArrow = false;
-      this.fileMenu.Size = new System.Drawing.Size(29, 22);
-      this.fileMenu.Text = "&File";
-      // 
-      // openToolStripMenuItem
-      // 
-      this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-      this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-      this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-      this.openToolStripMenuItem.Text = "&Open...";
-      // 
-      // toolStripSeparator1
-      // 
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
-      // 
-      // exitToolStripMenuItem
-      // 
-      this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-      this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-      this.exitToolStripMenuItem.Text = "E&xit";
-      // 
-      // speedMenu
-      // 
-      this.speedMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-      this.speedMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.increaseToolStripMenuItem,
-            this.decreaseToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.increaseGroupSizeToolStripMenuItem,
-            this.decreaseGroupSizeToolStripMenuItem});
-      this.speedMenu.Image = ((System.Drawing.Image)(resources.GetObject("speedMenu.Image")));
-      this.speedMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.speedMenu.Name = "speedMenu";
-      this.speedMenu.ShowDropDownArrow = false;
-      this.speedMenu.Size = new System.Drawing.Size(43, 22);
-      this.speedMenu.Text = "&Speed";
-      // 
-      // increaseToolStripMenuItem
-      // 
-      this.increaseToolStripMenuItem.Image = global::Veloxorede.Properties.Resources.up_circular_16;
-      this.increaseToolStripMenuItem.Name = "increaseToolStripMenuItem";
-      this.increaseToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+=";
-      this.increaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
-      this.increaseToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-      this.increaseToolStripMenuItem.Text = "&Increase";
-      this.increaseToolStripMenuItem.Click += new System.EventHandler(this.increaseToolStripMenuItem_Click);
-      // 
-      // decreaseToolStripMenuItem
-      // 
-      this.decreaseToolStripMenuItem.Image = global::Veloxorede.Properties.Resources.down_circular_16;
-      this.decreaseToolStripMenuItem.Name = "decreaseToolStripMenuItem";
-      this.decreaseToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
-      this.decreaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
-      this.decreaseToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-      this.decreaseToolStripMenuItem.Text = "&Decrease";
-      this.decreaseToolStripMenuItem.Click += new System.EventHandler(this.decreaseToolStripMenuItem_Click);
-      // 
-      // toolStripSeparator4
-      // 
-      this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(242, 6);
-      // 
-      // increaseGroupSizeToolStripMenuItem
-      // 
-      this.increaseGroupSizeToolStripMenuItem.Name = "increaseGroupSizeToolStripMenuItem";
-      this.increaseGroupSizeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
-      this.increaseGroupSizeToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-      this.increaseGroupSizeToolStripMenuItem.Text = "I&ncrease Group Size";
-      // 
-      // decreaseGroupSizeToolStripMenuItem
-      // 
-      this.decreaseGroupSizeToolStripMenuItem.Name = "decreaseGroupSizeToolStripMenuItem";
-      this.decreaseGroupSizeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
-      this.decreaseGroupSizeToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-      this.decreaseGroupSizeToolStripMenuItem.Text = "D&ecrease Group Size";
       // 
       // toolStrip2
       // 
       this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+      this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.intervalLabel,
             this.intervalValue,
@@ -266,16 +174,18 @@
             this.groupSizeValue,
             this.toolStripSeparator3,
             this.startStopButton,
-            this.pauseButton});
-      this.toolStrip2.Location = new System.Drawing.Point(87, 0);
+            this.pauseButton,
+            this.toolStripSeparator6,
+            this.toggleTextToSpeechButton});
+      this.toolStrip2.Location = new System.Drawing.Point(3, 25);
       this.toolStrip2.Name = "toolStrip2";
-      this.toolStrip2.Size = new System.Drawing.Size(334, 26);
+      this.toolStrip2.Size = new System.Drawing.Size(409, 31);
       this.toolStrip2.TabIndex = 1;
       // 
       // intervalLabel
       // 
       this.intervalLabel.Name = "intervalLabel";
-      this.intervalLabel.Size = new System.Drawing.Size(49, 23);
+      this.intervalLabel.Size = new System.Drawing.Size(49, 28);
       this.intervalLabel.Text = "Interval:";
       // 
       // intervalValue
@@ -296,7 +206,7 @@
             0,
             0});
       this.intervalValue.Name = "intervalValue";
-      this.intervalValue.Size = new System.Drawing.Size(41, 23);
+      this.intervalValue.Size = new System.Drawing.Size(41, 28);
       this.intervalValue.Text = "500";
       this.intervalValue.Value = global::Veloxorede.Properties.Settings.Default.Interval;
       this.intervalValue.ValueChanged += new System.EventHandler(this.intervalValue_ValueChanged);
@@ -304,12 +214,12 @@
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(6, 26);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
       // 
       // groupSizeLabel
       // 
       this.groupSizeLabel.Name = "groupSizeLabel";
-      this.groupSizeLabel.Size = new System.Drawing.Size(108, 23);
+      this.groupSizeLabel.Size = new System.Drawing.Size(108, 28);
       this.groupSizeLabel.Text = "Group size (words):";
       // 
       // groupSizeValue
@@ -330,7 +240,7 @@
             0,
             0});
       this.groupSizeValue.Name = "groupSizeValue";
-      this.groupSizeValue.Size = new System.Drawing.Size(35, 23);
+      this.groupSizeValue.Size = new System.Drawing.Size(35, 28);
       this.groupSizeValue.Text = "1";
       this.groupSizeValue.Value = global::Veloxorede.Properties.Settings.Default.GroupSize;
       this.groupSizeValue.ValueChanged += new System.EventHandler(this.groupSizeValue_ValueChanged);
@@ -338,7 +248,7 @@
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 26);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
       // 
       // startStopButton
       // 
@@ -346,7 +256,7 @@
       this.startStopButton.Image = global::Veloxorede.Properties.Resources.play_6_16;
       this.startStopButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.startStopButton.Name = "startStopButton";
-      this.startStopButton.Size = new System.Drawing.Size(23, 23);
+      this.startStopButton.Size = new System.Drawing.Size(28, 28);
       this.startStopButton.Text = "Start";
       this.startStopButton.Click += new System.EventHandler(this.startStopButton_Click);
       // 
@@ -357,12 +267,158 @@
       this.pauseButton.Image = global::Veloxorede.Properties.Resources.pause_16;
       this.pauseButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.pauseButton.Name = "pauseButton";
-      this.pauseButton.Size = new System.Drawing.Size(23, 23);
+      this.pauseButton.Size = new System.Drawing.Size(28, 28);
       this.pauseButton.Text = "Pause";
       this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
       // 
+      // toolStripSeparator6
+      // 
+      this.toolStripSeparator6.Name = "toolStripSeparator6";
+      this.toolStripSeparator6.Size = new System.Drawing.Size(6, 31);
+      // 
+      // toggleTextToSpeechButton
+      // 
+      this.toggleTextToSpeechButton.CheckOnClick = true;
+      this.toggleTextToSpeechButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+      this.toggleTextToSpeechButton.Image = ((System.Drawing.Image)(resources.GetObject("toggleTextToSpeechButton.Image")));
+      this.toggleTextToSpeechButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.toggleTextToSpeechButton.Name = "toggleTextToSpeechButton";
+      this.toggleTextToSpeechButton.Size = new System.Drawing.Size(90, 28);
+      this.toggleTextToSpeechButton.Text = "Text-to-speech";
+      this.toggleTextToSpeechButton.ToolTipText = "Enable/disable text-to-speech synthesis";
+      // 
+      // toolStrip1
+      // 
+      this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+      this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+      this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileMenu,
+            this.speedMenu});
+      this.toolStrip1.Location = new System.Drawing.Point(3, 0);
+      this.toolStrip1.Name = "toolStrip1";
+      this.toolStrip1.Size = new System.Drawing.Size(84, 25);
+      this.toolStrip1.TabIndex = 0;
+      // 
+      // fileMenu
+      // 
+      this.fileMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+      this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.importFromClipboardToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
+      this.fileMenu.Image = ((System.Drawing.Image)(resources.GetObject("fileMenu.Image")));
+      this.fileMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.fileMenu.Name = "fileMenu";
+      this.fileMenu.ShowDropDownArrow = false;
+      this.fileMenu.Size = new System.Drawing.Size(29, 22);
+      this.fileMenu.Text = "&File";
+      // 
+      // openToolStripMenuItem
+      // 
+      this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+      this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+      this.openToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+      this.openToolStripMenuItem.Text = "&Open...";
+      // 
+      // importFromClipboardToolStripMenuItem
+      // 
+      this.importFromClipboardToolStripMenuItem.Name = "importFromClipboardToolStripMenuItem";
+      this.importFromClipboardToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+      this.importFromClipboardToolStripMenuItem.Text = "Import from &clipboard";
+      this.importFromClipboardToolStripMenuItem.Click += new System.EventHandler(this.importFromClipboardToolStripMenuItem_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(189, 6);
+      // 
+      // exitToolStripMenuItem
+      // 
+      this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+      this.exitToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+      this.exitToolStripMenuItem.Text = "E&xit";
+      // 
+      // speedMenu
+      // 
+      this.speedMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+      this.speedMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.increaseToolStripMenuItem,
+            this.decreaseToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.increaseGroupSizeToolStripMenuItem,
+            this.decreaseGroupSizeToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.pauseContinueToolStripMenuItem});
+      this.speedMenu.Image = ((System.Drawing.Image)(resources.GetObject("speedMenu.Image")));
+      this.speedMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.speedMenu.Name = "speedMenu";
+      this.speedMenu.ShowDropDownArrow = false;
+      this.speedMenu.Size = new System.Drawing.Size(43, 22);
+      this.speedMenu.Text = "&Speed";
+      // 
+      // increaseToolStripMenuItem
+      // 
+      this.increaseToolStripMenuItem.Image = global::Veloxorede.Properties.Resources.up_circular_16;
+      this.increaseToolStripMenuItem.Name = "increaseToolStripMenuItem";
+      this.increaseToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+=";
+      this.increaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
+      this.increaseToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+      this.increaseToolStripMenuItem.Text = "&Increase";
+      this.increaseToolStripMenuItem.Click += new System.EventHandler(this.increaseToolStripMenuItem_Click);
+      // 
+      // decreaseToolStripMenuItem
+      // 
+      this.decreaseToolStripMenuItem.Image = global::Veloxorede.Properties.Resources.down_circular_16;
+      this.decreaseToolStripMenuItem.Name = "decreaseToolStripMenuItem";
+      this.decreaseToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+-";
+      this.decreaseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
+      this.decreaseToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+      this.decreaseToolStripMenuItem.Text = "&Decrease";
+      this.decreaseToolStripMenuItem.Click += new System.EventHandler(this.decreaseToolStripMenuItem_Click);
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(248, 6);
+      // 
+      // increaseGroupSizeToolStripMenuItem
+      // 
+      this.increaseGroupSizeToolStripMenuItem.Name = "increaseGroupSizeToolStripMenuItem";
+      this.increaseGroupSizeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+=";
+      this.increaseGroupSizeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Oemplus)));
+      this.increaseGroupSizeToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+      this.increaseGroupSizeToolStripMenuItem.Text = "I&ncrease Group Size";
+      this.increaseGroupSizeToolStripMenuItem.Click += new System.EventHandler(this.increaseGroupSizeToolStripMenuItem_Click);
+      // 
+      // decreaseGroupSizeToolStripMenuItem
+      // 
+      this.decreaseGroupSizeToolStripMenuItem.Name = "decreaseGroupSizeToolStripMenuItem";
+      this.decreaseGroupSizeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+-";
+      this.decreaseGroupSizeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.OemMinus)));
+      this.decreaseGroupSizeToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+      this.decreaseGroupSizeToolStripMenuItem.Text = "D&ecrease Group Size";
+      this.decreaseGroupSizeToolStripMenuItem.Click += new System.EventHandler(this.decreaseGroupSizeToolStripMenuItem_Click);
+      // 
+      // toolStripSeparator5
+      // 
+      this.toolStripSeparator5.Name = "toolStripSeparator5";
+      this.toolStripSeparator5.Size = new System.Drawing.Size(248, 6);
+      // 
+      // pauseContinueToolStripMenuItem
+      // 
+      this.pauseContinueToolStripMenuItem.Enabled = false;
+      this.pauseContinueToolStripMenuItem.Name = "pauseContinueToolStripMenuItem";
+      this.pauseContinueToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+      this.pauseContinueToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+      this.pauseContinueToolStripMenuItem.Text = "&Pause/Continue";
+      this.pauseContinueToolStripMenuItem.Click += new System.EventHandler(this.pauseContinueToolStripMenuItem_Click);
+      // 
       // statusStrip1
       // 
+      this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.statusLabel});
@@ -402,10 +458,10 @@
       this.tabs.ResumeLayout(false);
       this.inputTab.ResumeLayout(false);
       this.scrollingTab.ResumeLayout(false);
-      this.toolStrip1.ResumeLayout(false);
-      this.toolStrip1.PerformLayout();
       this.toolStrip2.ResumeLayout(false);
       this.toolStrip2.PerformLayout();
+      this.toolStrip1.ResumeLayout(false);
+      this.toolStrip1.PerformLayout();
       this.statusStrip1.ResumeLayout(false);
       this.statusStrip1.PerformLayout();
       this.ResumeLayout(false);
@@ -445,6 +501,11 @@
     private System.Windows.Forms.StatusStrip statusStrip1;
     private System.Windows.Forms.ToolStripProgressBar progressBar;
     private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-  }
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+    private System.Windows.Forms.ToolStripMenuItem pauseContinueToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem importFromClipboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton toggleTextToSpeechButton;
+    }
 }
 

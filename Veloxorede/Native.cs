@@ -10,25 +10,32 @@ namespace Veloxorede
   public class Native
   {
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, StringBuilder lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam,
+      StringBuilder lParam);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, 
+      [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, 
+      [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, ref IntPtr lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, 
+      ref IntPtr lParam);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, 
+      IntPtr lParam);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, 
+      int lParam);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, ref PARAFORMAT paraFmt);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, 
+      ref PARAFORMAT paraFmt);
 
     public const int PFM_SPACEBEFORE = 0x00000040;
     public const int PFM_SPACEAFTER = 0x00000080;

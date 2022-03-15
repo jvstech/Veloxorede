@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,16 +26,24 @@ namespace Veloxorede
       InitializeComponent();
     }
 
-    private void ParseInputText()
+    private async Task ParseInputText()
     {
       scrollingText.SuspendLayout();
       ClearScrollingText();
-      textLocations_ = Program.Parse(inputText.Text,
-        word => AddScrollingWord(word),
-        space => AddScrollingSpace(space))
-        .Where(l => l.Type == TextType.Word)
-        .OrderBy(l => l.Start)
-        .ToList();
+      if (toggleTextToSpeechButton.Checked)
+      {
+        textLocations_ = await Program.ParseSentencesAsync(inputText.Text);
+      }
+      else
+      {
+        textLocations_ = (await Program.ParseAsync(inputText.Text,
+          word => AddScrollingWord(word),
+          space => AddScrollingSpace(space)))
+          .Where(l => l.Type == TextType.Word)
+          .OrderBy(l => l.Start)
+          .ToList();
+      }
+
       scrollingText.ResumeLayout();
     }
 
@@ -43,24 +54,48 @@ namespace Veloxorede
 
     private void AddScrollingSpace(string space)
     {
-      int selectStart = scrollingText.TextLength;
-      scrollingText.AppendText(space);
-      int selectLen = scrollingText.TextLength - selectStart;
-      scrollingText.SelectionStart = selectStart;
-      scrollingText.SelectionLength = selectLen;
-      scrollingText.SelectionColor = Program.TextColor;
-      scrollingText.SelectionBackColor = scrollingText.BackColor;
+      var addSpaceAction = new Action(() =>
+      {
+        int selectStart = scrollingText.TextLength;
+        scrollingText.AppendText(space);
+        int selectLen = scrollingText.TextLength - selectStart;
+        scrollingText.SelectionStart = selectStart;
+        scrollingText.SelectionLength = selectLen;
+        scrollingText.SelectionColor = Program.TextColor;
+        scrollingText.SelectionBackColor = scrollingText.BackColor;
+      });
+      
+      if (scrollingText.InvokeRequired)
+      {
+        scrollingText.Invoke(addSpaceAction);
+      }
+      else
+      {
+        addSpaceAction();
+      }
     }
 
     private void AddScrollingWord(string word)
     {
-      int selectStart = scrollingText.TextLength;
-      scrollingText.AppendText(word);
-      int selectLen = scrollingText.TextLength - selectStart;
-      scrollingText.SelectionStart = selectStart;
-      scrollingText.SelectionLength = selectLen;
-      scrollingText.SelectionColor = Program.HiddenColor;
-      scrollingText.SelectionBackColor = Program.HiddenColor;
+      var addWordAction = new Action(() =>
+      {
+        int selectStart = scrollingText.TextLength;
+        scrollingText.AppendText(word);
+        int selectLen = scrollingText.TextLength - selectStart;
+        scrollingText.SelectionStart = selectStart;
+        scrollingText.SelectionLength = selectLen;
+        scrollingText.SelectionColor = Program.HiddenColor;
+        scrollingText.SelectionBackColor = Program.HiddenColor;
+      });
+
+      if (scrollingText.InvokeRequired)
+      {
+        scrollingText.Invoke(addWordAction);
+      }
+      else
+      {
+        addWordAction();
+      }
     }
 
     private void ClearScrollingText()
@@ -104,7 +139,7 @@ namespace Veloxorede
       Program.SetLineSpacing(scrollingText, LineSpacingRule.OneAndAHalf);
     }
 
-    private async void MainForm_FormClosing(object sender, 
+    private async void MainForm_FormClosing(object sender,
       FormClosingEventArgs e)
     {
       await this.PerformStop();
@@ -132,35 +167,73 @@ namespace Veloxorede
       Properties.Settings.Default.Save();
     }
 
-    private async Task StartScrolling(CancellationToken cancelToken,
-      PauseToken pauseToken)
+    private async Task StartScrolling(bool includeTextToSpeech,
+      CancellationToken cancelToken, PauseToken pauseToken)
     {
-      this.PrepareToStart();
+      Func<int, int> getLineNumber = (n) =>
+        scrollingText.GetLineFromCharIndex(textLocations_[n].Start);
 
-      //if (!textLocations_.Any())
-      //{
-      //  return;
-      //}
-      
+      await this.PrepareToStart();
+
       int lastIdx = this.textLocations_.Count - 1;
-      for (int idx = 0; idx <= lastIdx; idx++)
+      StringBuilder voiceBuffer = null;
+      using (var tts = new SpeechSynthesizer())
       {
-        this.ShowScrollingWord(idx);
-
-        if (idx >= lastIdx)
+        if (includeTextToSpeech)
         {
-          break;
+          tts.SetOutputToDefaultAudioDevice();
+          tts.Rate = -(Program.IntegerLerp((int)intervalValue.Value,
+            (int)intervalValue.Minimum, (int)intervalValue.Maximum,
+            -10, 10));
+          voiceBuffer = new StringBuilder();
         }
 
-        if (idx % (int)this.groupSizeValue.Value == 0)
+        for (int idx = 0; idx <= lastIdx; idx++)
         {
-          if (cancelToken.IsCancellationRequested)
+          this.ShowScrollingWord(idx);
+          if (idx >= lastIdx)
           {
             break;
           }
 
-          await pauseToken.WaitWhilePausedAsync();
-          await Task.Delay((int)this.intervalValue.Value);
+          if (includeTextToSpeech)
+          {
+            string sentence = textLocations_[idx].GetText(inputText.Text);
+            sentence = Regex.Replace(sentence, @"[\r\n]+", " ");
+            sentence = Regex.Replace(sentence, @" {2,}", " ");
+            voiceBuffer.Append(sentence);
+            Debug.WriteLine(voiceBuffer.ToString());
+          }
+
+          if (!includeTextToSpeech)
+          {
+            if (idx % (int)this.groupSizeValue.Value == 0 ||
+              // Don't unmask text across line boundaries
+              (idx < lastIdx &&
+              getLineNumber(idx + 1) != getLineNumber(idx)))
+            {
+              int delay = (int)this.intervalValue.Value;
+              if (cancelToken.IsCancellationRequested)
+              {
+                break;
+              }
+
+              await pauseToken.WaitWhilePausedAsync();
+              await Task.Delay(delay);
+            }
+          }
+          else
+          {
+            await Task.Run(() => tts.Speak(voiceBuffer.ToString()), 
+              cancelToken);
+            voiceBuffer.Clear();
+            if (cancelToken.IsCancellationRequested)
+            {
+              break;
+            }
+
+            await pauseToken.WaitWhilePausedAsync();
+          }
         }
       }
 
@@ -169,14 +242,15 @@ namespace Veloxorede
 
     private void ToggleControls()
     {
-      Program.ToggleControls(inputText, pauseButton, openToolStripMenuItem);
+      Program.ToggleControls(inputText, pauseButton,
+        pauseContinueToolStripMenuItem, openToolStripMenuItem);
     }
 
-    private void PrepareToStart()
+    private async Task PrepareToStart()
     {
       ToggleControls();
       this.startStopButton.Image = Properties.Resources.stop_16;
-      ParseInputText();
+      await ParseInputText();
     }
 
     private void PrepareForStop()
@@ -196,8 +270,8 @@ namespace Veloxorede
 
       var pauseToken = this.pauseTokenSource_.Token;
       this.cancelTokenSource_ = new CancellationTokenSource();
-      readingTask_ = this.StartScrolling(this.cancelTokenSource_.Token, 
-        pauseToken);
+      readingTask_ = this.StartScrolling(toggleTextToSpeechButton.Checked,
+        this.cancelTokenSource_.Token, pauseToken);
       await readingTask_;
       readingTask_ = null;
     }
@@ -220,6 +294,34 @@ namespace Veloxorede
     {
       this.pauseTokenSource_.IsPaused = !this.pauseTokenSource_.IsPaused;
       this.statusLabel.Text = this.pauseTokenSource_.IsPaused ? "Paused" : "";
+    }
+
+    private void pauseContinueToolStripMenuItem_Click(object sender, 
+      EventArgs e)
+    {
+      pauseButton.PerformClick();
+    }
+
+    private void increaseGroupSizeToolStripMenuItem_Click(object sender, 
+      EventArgs e)
+    {
+      (groupSizeValue.NumericUpDownControl as NumericUpDown).UpButton();
+    }
+
+    private void decreaseGroupSizeToolStripMenuItem_Click(object sender, 
+      EventArgs e)
+    {
+      (groupSizeValue.NumericUpDownControl as NumericUpDown).DownButton();
+    }
+
+    private void importFromClipboardToolStripMenuItem_Click(object sender, 
+      EventArgs e)
+    {
+      //var extAsciiEncoding = Encoding.GetEncoding("windows-1252");
+      var input = Clipboard.GetText(TextDataFormat.Text);
+      input = Regex.Replace(input, "\u201c|\u201d", "\"");
+      input = Regex.Replace(input, "(\u2014)", " $1 ");
+      inputText.Text = input;
     }
   }
 }
